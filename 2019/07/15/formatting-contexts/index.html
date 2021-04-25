@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在 CSS 2.1 规范中我们定义了常规流（Normal Flow）。常规流中的任何一个盒子总是某个格式区域（formatting context）中的一部分。块级盒子是在块格式区域（block formatting context）中工作的盒子，而内联盒子是在内联格式区域（inline formatting context）中工作的盒子。任何一个盒子总是块级盒子或内联盒子中的一种。 块格式区域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="格式化上下文简介">
+<meta property="og:url" content="http://example.com/2019/07/15/formatting-contexts/index.html">
+<meta property="og:site_name" content="Kitty叔叔的博客">
+<meta property="og:description" content="在 CSS 2.1 规范中我们定义了常规流（Normal Flow）。常规流中的任何一个盒子总是某个格式区域（formatting context）中的一部分。块级盒子是在块格式区域（block formatting context）中工作的盒子，而内联盒子是在内联格式区域（inline formatting context）中工作的盒子。任何一个盒子总是块级盒子或内联盒子中的一种。 块格式区域">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-15T07:21:03.000Z">
+<meta property="article:modified_time" content="2021-04-02T13:32:21.128Z">
+<meta property="article:author" content="Kitty叔叔">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>格式化上下文简介</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/07/15/css-box-model/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/07/15/bom-apis/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/15/formatting-contexts/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/15/formatting-contexts/&text=格式化上下文简介"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/15/formatting-contexts/&is_video=false&description=格式化上下文简介"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=格式化上下文简介&body=Check out this article: http://example.com/2019/07/15/formatting-contexts/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/15/formatting-contexts/&name=格式化上下文简介&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/15/formatting-contexts/&t=格式化上下文简介"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E6%A0%BC%E5%BC%8F%E5%8C%BA%E5%9F%9F-block-formatting-context"><span class="toc-number">1.</span> <span class="toc-text">块格式区域 (block formatting context)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94%E6%A0%BC%E5%BC%8F%E5%8C%BA%E5%9F%9F-inline-formatting-context"><span class="toc-number">2.</span> <span class="toc-text">内联格式区域 (inline formatting context)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%BE%B9%E8%B7%9D%E9%87%8D%E5%8F%A0"><span class="toc-number">3.</span> <span class="toc-text">外边距重叠</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        格式化上下文简介
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kitty叔叔</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-15T07:21:03.000Z" itemprop="datePublished">2019-07-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>在 CSS 2.1 规范中我们定义了常规流（Normal Flow）。常规流中的任何一个盒子总是某个格式区域（formatting context）中的一部分。块级盒子是在块格式区域（block formatting context）中工作的盒子，而内联盒子是在内联格式区域（inline formatting context）中工作的盒子。任何一个盒子总是块级盒子或内联盒子中的一种。</strong></p>
+<h2 id="块格式区域-block-formatting-context"><a href="#块格式区域-block-formatting-context" class="headerlink" title="块格式区域 (block formatting context)"></a>块格式区域 (block formatting context)</h2><p>在一个块格式区域中</p>
+<ul>
+<li>盒子会从包含块的顶部开始，按序垂直排列</li>
+<li>同级盒子间的垂直距离会由“margin”属性决定。相邻两个块级盒子之间的垂直间距会遵循外边距折叠原则被折叠</li>
+<li>每个盒子的左外边缘会与包含块左边缘重合（如果是从右到左的排版顺序，则盒子的右外边缘与包含块右边缘重合）</li>
+</ul>
+<p><strong>创建 BFC</strong></p>
+<ul>
+<li><code>&lt;html&gt;</code></li>
+<li>float 不为 none;</li>
+<li>position 的值不是 static 或者 relative</li>
+<li>display 的值是 flow-root、 inline-block、table-cell、flex、table-caption 或者 inline-flex 等</li>
+<li>overflow 的值不是 visible</li>
+</ul>
+<p><strong>*新的 BFC 的行为与最外层的文档非常相似，它在主布局中创造了一个小布局。BFC 包含其内部的所有内容，float 和 clear 仅适用于同一格式上下文中的项目，而页边距仅在同一格式上下文中的元素之间折叠。</strong></p>
+<h2 id="内联格式区域-inline-formatting-context"><a href="#内联格式区域-inline-formatting-context" class="headerlink" title="内联格式区域 (inline formatting context)"></a>内联格式区域 (inline formatting context)</h2><p>在内联格式区域中</p>
+<ul>
+<li>盒子会从包含块的顶部开始，按序水平排列。</li>
+<li>只有水平外边距、边框合内边距会被保留。</li>
+<li>这些盒子可以以不同的方式在垂直方向上对齐：可以底部对齐或顶部对其，或者按文字底部进行对齐</li>
+</ul>
+<p>我们把包含一串盒子的矩形区域称为一个”inline-box”</p>
+<h2 id="外边距重叠"><a href="#外边距重叠" class="headerlink" title="外边距重叠"></a>外边距重叠</h2><p><strong>块的上外边距(margin-top)和下外边距(margin-bottom)有时合并(折叠)为单个边距，其大小为单个边距的最大值(或如果它们相等，则仅为其中一个)，这种行为称为边距折叠。</strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E6%A0%BC%E5%BC%8F%E5%8C%BA%E5%9F%9F-block-formatting-context"><span class="toc-number">1.</span> <span class="toc-text">块格式区域 (block formatting context)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94%E6%A0%BC%E5%BC%8F%E5%8C%BA%E5%9F%9F-inline-formatting-context"><span class="toc-number">2.</span> <span class="toc-text">内联格式区域 (inline formatting context)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%BE%B9%E8%B7%9D%E9%87%8D%E5%8F%A0"><span class="toc-number">3.</span> <span class="toc-text">外边距重叠</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/15/formatting-contexts/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/15/formatting-contexts/&text=格式化上下文简介"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/15/formatting-contexts/&is_video=false&description=格式化上下文简介"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=格式化上下文简介&body=Check out this article: http://example.com/2019/07/15/formatting-contexts/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/15/formatting-contexts/&title=格式化上下文简介"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/15/formatting-contexts/&name=格式化上下文简介&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/15/formatting-contexts/&t=格式化上下文简介"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    Kitty叔叔
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

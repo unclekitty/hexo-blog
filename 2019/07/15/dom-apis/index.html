@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="查找节点根据 ID 查找元素，大小写敏感，如果有多个结果，只返回第一个 1el &#x3D; document.getElementById(&quot;id&quot;);  根据类名查找元素，多个类名用空格分隔，返回一个 HTMLCollection 1el &#x3D; document.getElementsByClassName(&quot;class-name&quot;);  根据标签查找元素(* 表示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用 DOM API">
+<meta property="og:url" content="http://example.com/2019/07/15/dom-apis/index.html">
+<meta property="og:site_name" content="Kitty叔叔的博客">
+<meta property="og:description" content="查找节点根据 ID 查找元素，大小写敏感，如果有多个结果，只返回第一个 1el &#x3D; document.getElementById(&quot;id&quot;);  根据类名查找元素，多个类名用空格分隔，返回一个 HTMLCollection 1el &#x3D; document.getElementsByClassName(&quot;class-name&quot;);  根据标签查找元素(* 表示">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-15T07:21:03.000Z">
+<meta property="article:modified_time" content="2021-04-02T09:47:36.781Z">
+<meta property="article:author" content="Kitty叔叔">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>常用 DOM API</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/07/15/high-erformance-javaScript/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/07/15/css-box-model/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/15/dom-apis/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/15/dom-apis/&text=常用 DOM API"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/15/dom-apis/&is_video=false&description=常用 DOM API"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用 DOM API&body=Check out this article: http://example.com/2019/07/15/dom-apis/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/15/dom-apis/&name=常用 DOM API&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/15/dom-apis/&t=常用 DOM API"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">查找节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E8%8A%82%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">克隆节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">插入节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">删除节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E8%8A%82%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">替换节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">属性操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window-getComputedStyle-%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E5%88%B0%E5%85%83%E7%B4%A0%E4%B8%8A%E7%9A%84%E6%89%80%E6%9C%89%E6%A0%B7%E5%BC%8F"><span class="toc-number">8.</span> <span class="toc-text">window.getComputedStyle 获取应用到元素上的所有样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getBoundingClientRect-%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0%E7%9A%84%E5%A4%A7%E5%B0%8F%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%AF%B9%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E8%A7%86%E7%AA%97%E5%8F%A3%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">9.</span> <span class="toc-text">getBoundingClientRect 返回元素的大小以及相对于浏览器可视窗口的位置</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        常用 DOM API
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kitty叔叔</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-15T07:21:03.000Z" itemprop="datePublished">2019-07-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><p><strong>根据 ID 查找元素，大小写敏感，如果有多个结果，只返回第一个</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.getElementById(<span class="string">&quot;id&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>根据类名查找元素，多个类名用空格分隔，返回一个 HTMLCollection</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;class-name&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>根据标签查找元素(* 表示查询所有标签), 返回一个 HTMLCollection</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>根据元素的 name 属性查找，返回一个 NodeList</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.getElementsByName(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>根据 CSS 选择器查找元素， 如果匹配到多个结果，只返回第一个</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.querySelector(<span class="string">&quot;#id&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>根据 CSS 选择器查找元素， 如果匹配到多个结果，返回一个 NodeList</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.class&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h2><p><strong>创建元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建文本元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el = <span class="built_in">document</span>.createTextNode(<span class="string">&quot;hello world&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>createDocumentFragment</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">&quot;ul&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"><span class="keyword">var</span> browsers = [<span class="string">&quot;Firefox&quot;</span>, <span class="string">&quot;Chrome&quot;</span>, <span class="string">&quot;Opera&quot;</span>, <span class="string">&quot;Safari&quot;</span>, <span class="string">&quot;Internet Explorer&quot;</span>];</span><br><span class="line"></span><br><span class="line">browsers.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">browser</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">  li.textContent = browser;</span><br><span class="line">  fragment.appendChild(li);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">element.appendChild(fragment);</span><br></pre></td></tr></table></figure>
+
+<h2 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h2><p><strong>node.cloneNode(true/false), 它接收一个 bool 参数，用来表示是否复制子元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> = <span class="built_in">document</span>.getElementById(<span class="string">&quot;form&quot;</span>);</span><br><span class="line">clone = <span class="keyword">from</span>.cloneNode(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h2><p><strong>appendChild</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parent.appendChild(child);</span><br></pre></td></tr></table></figure>
+
+<p><strong>insertBefore</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parentNode.insertBefore(newNode, refNode);</span><br></pre></td></tr></table></figure>
+
+<p><strong>insertAdjacentHTML</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.insertAdjacentHTML(position, text);</span><br></pre></td></tr></table></figure>
+
+<p><em>position 表示插入内容相对于元素的位置 ()</em></p>
+<ul>
+<li>‘beforebegin’：元素自身的前面。</li>
+<li>‘afterbegin’：插入元素内部的第一个子节点之前。</li>
+<li>‘beforeend’：插入元素内部的最后一个子节点之后。</li>
+<li>‘afterend’：元素自身的后面。</li>
+</ul>
+<p><em>text 是要被解析为 HTML 或 XML 元素，并插入到 DOM 树中的 DOMString</em></p>
+<h2 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h2><p><strong>removeChild 删除指定的子节点并返回子节点</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deletedChild = parent.removeChild(node);</span><br></pre></td></tr></table></figure>
+
+<h2 id="替换节点"><a href="#替换节点" class="headerlink" title="替换节点"></a>替换节点</h2><p><strong>replaceChild 用于将一个节点替换另一个节点</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parent.replaceChild(newChild, oldChild);</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h2><p><strong>setAttribute 给元素设置属性</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.setAttribute(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>getAttribute 返回指定的特性名相应的特性值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id = element.getAttribute(<span class="string">&quot;id&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="window-getComputedStyle-获取应用到元素上的所有样式"><a href="#window-getComputedStyle-获取应用到元素上的所有样式" class="headerlink" title="window.getComputedStyle 获取应用到元素上的所有样式"></a>window.getComputedStyle 获取应用到元素上的所有样式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.getComputedStyle(element[,pseudo-element]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="getBoundingClientRect-返回元素的大小以及相对于浏览器可视窗口的位置"><a href="#getBoundingClientRect-返回元素的大小以及相对于浏览器可视窗口的位置" class="headerlink" title="getBoundingClientRect 返回元素的大小以及相对于浏览器可视窗口的位置"></a>getBoundingClientRect 返回元素的大小以及相对于浏览器可视窗口的位置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clientRect = element.getBoundingClientRect();</span><br></pre></td></tr></table></figure>
+
+<p><em>clientRect 是一个 DOMRect 对象，包含 width、height、left、top、right、bottom</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">查找节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E8%8A%82%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">克隆节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">插入节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">删除节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E8%8A%82%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">替换节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">属性操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window-getComputedStyle-%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E5%88%B0%E5%85%83%E7%B4%A0%E4%B8%8A%E7%9A%84%E6%89%80%E6%9C%89%E6%A0%B7%E5%BC%8F"><span class="toc-number">8.</span> <span class="toc-text">window.getComputedStyle 获取应用到元素上的所有样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getBoundingClientRect-%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0%E7%9A%84%E5%A4%A7%E5%B0%8F%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%AF%B9%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%AF%E8%A7%86%E7%AA%97%E5%8F%A3%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">9.</span> <span class="toc-text">getBoundingClientRect 返回元素的大小以及相对于浏览器可视窗口的位置</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/15/dom-apis/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/15/dom-apis/&text=常用 DOM API"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/15/dom-apis/&is_video=false&description=常用 DOM API"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用 DOM API&body=Check out this article: http://example.com/2019/07/15/dom-apis/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/15/dom-apis/&title=常用 DOM API"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/15/dom-apis/&name=常用 DOM API&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/15/dom-apis/&t=常用 DOM API"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    Kitty叔叔
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
